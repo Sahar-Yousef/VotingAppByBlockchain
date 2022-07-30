@@ -22,4 +22,14 @@ contract VotingContract {
     function getTotalNo() public view returns (int) {
         return Nocount;
     }
+    
+    //  Maxumim vote
+     function GetMaxVote() public view returns (uint) {
+     if (Yescount > m) {
+         return Yescount;
+     } else {
+         return Nocount;
+     }
+     
+    
 }
