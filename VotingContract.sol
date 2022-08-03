@@ -1,9 +1,7 @@
+pragma solidity >=0.4.0 <0.9.0;
 
-// SPDX-License-Identifier: GPL-3.0
+contract Proj {
 
-pragma solidity >=0.7.0 <0.9.0;
-
-contract VotingContract {
     int private Yescount = 0;
     int private Nocount = 0;
     int private TotalVote =0;
@@ -35,7 +33,7 @@ contract VotingContract {
         TotalVote = (Yescount + Nocount );
     }
     //return Total vote
-    function GetTotalVote() public view returns (int){
+    function GetTotalVote() public view returns (int) {
         return TotalVote;
     }
 
@@ -44,9 +42,44 @@ contract VotingContract {
     function GetMaxVote() public view returns (int) {
       if (Yescount > Nocount) {
          return Yescount;
-     } else {
+         } else {
          return Nocount;
-     }
-     
-     }
+        }
+    }
+
+
+    // Users Struct
+    struct UserStruct {
+        uint index;
+    }
+  
+    // Mapping users to addresss
+    mapping(address => UserStruct) private userStructs;
+    address[] private userIndex;
+
+    // New user event
+    event LogNewUser (address indexed userAddress, uint index);
+  
+    // Check if it existing user
+    function isUser(address userAddress) public  constant returns(bool isIndeed) {
+        if(userIndex.length == 0) return false;
+             return (userIndex[userStructs[userAddress].index] == userAddress);
+    }
+
+    // Insert new users
+    function insertUser( address userAddress) public returns(uint index) {
+        if(isUser(userAddress)) throw; 
+             userStructs[userAddress].index = userIndex.push(userAddress)-1;
+        LogNewUser(
+            userAddress, 
+            userStructs[userAddress].index);
+        return userIndex.length-1;
+    }
+  
+    // Get users counts
+    function getUserCount() public constant returns(uint count) {
+        return userIndex.length;
+    }
+
+
 }
