@@ -1,6 +1,6 @@
 pragma solidity >=0.4.0 <0.9.0;
 
-contract Proj {
+contract VotingContract {
 
     int private Yescount = 0;
     int private Nocount = 0;
