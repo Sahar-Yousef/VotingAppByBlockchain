@@ -2,10 +2,22 @@ pragma solidity >=0.4.0 <0.9.0;
 
 contract VotingContract {
 
+    // Vars
     int private Yescount = 0;
     int private Nocount = 0;
     int private TotalVote = 0;
     uint private ind = 1;
+    string private Title;
+
+    
+    // Set voting title
+    function setTitle (string memory newTitle) public  {
+      Title = newTitle;
+    }
+    // get voting title
+    function getTitle() public view returns (string memory) {
+      return Title;
+    }
 
 
 
